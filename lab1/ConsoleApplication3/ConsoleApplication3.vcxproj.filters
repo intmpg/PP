@@ -27,7 +27,7 @@
     <ClInclude Include="matrix.h">
       <Filter>Заголовочные файлы</Filter>
     </ClInclude>
-    <ClInclude Include="CThreadInverseMatrix.h">
+    <ClInclude Include="CInverseMatrix.h">
       <Filter>Заголовочные файлы</Filter>
     </ClInclude>
   </ItemGroup>

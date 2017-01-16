@@ -15,4 +15,5 @@ private:
 	std::vector<std::vector<double>> m_matrix;
 	std::vector<std::vector<double>> m_eMatrix;
 	size_t n;
+	
 };

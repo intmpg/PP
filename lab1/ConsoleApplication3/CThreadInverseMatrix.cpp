@@ -1,35 +1,39 @@
 #include "stdafx.h"
-#include "CThreadInverseMatrix.h"
+#include "CInverseMatrix.h"
 
-void  StartParall(CThreadInverseMatrix * matr, size_t num)
+
+void  StartParall(CInverseMatrix * matr, size_t num)
 {
-	matr->DoInverseMatrix(num, num+1);
+	matr->DoInverseMatrix(num, num + 1);
 }
 
-CThreadInverseMatrix::CThreadInverseMatrix(CMatrix & const matrix)
+void CInverseMatrix::GetMatrixSize(CMatrix & const matrix)
 {
 	m_eMatrix = matrix.GetEMatrix();
 	m_matrix = matrix.GetMatrix();
 	n = matrix.GetSize();
+}
+
+CInverseMatrix::CInverseMatrix(CMatrix & const matrix)
+{
+	GetMatrixSize(matrix);
 	DoInverseMatrix(0, n);
 };
 
-CThreadInverseMatrix::CThreadInverseMatrix(CMatrix & const matrix, int threadNumber)
+CInverseMatrix::CInverseMatrix(CMatrix & const matrix, int threadNumber)
 {
-	m_eMatrix = matrix.GetEMatrix();
-	m_matrix = matrix.GetMatrix();
-	n = matrix.GetSize();
+	GetMatrixSize(matrix);
 	maxThread = threadNumber;
 	DoParallInverseMatrix();
 };
 
 
-CThreadInverseMatrix::~CThreadInverseMatrix()
+CInverseMatrix::~CInverseMatrix()
 {
 };
 
 
-void CThreadInverseMatrix::DoInverseMatrix(size_t start, size_t finish)
+void CInverseMatrix::DoInverseMatrix(size_t start, size_t finish)
 {
 	for (size_t diagonal = start; diagonal < finish; diagonal++)
 	{
@@ -75,7 +79,7 @@ void CThreadInverseMatrix::DoInverseMatrix(size_t start, size_t finish)
 	}
 }
 
-void CThreadInverseMatrix::DoParallInverseMatrix()
+void CInverseMatrix::DoParallInverseMatrix()
 {	
 	thrs.resize(maxThread);
 	size_t currentThread = 0;
